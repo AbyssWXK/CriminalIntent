@@ -8,6 +8,7 @@ public class Crime {
     private String mTitle;
     private Date mDate;
     private boolean mSolved;
+    private int mViewType;
     public Crime(){
         mId = UUID.randomUUID();
         mDate = new Date();
@@ -39,5 +40,13 @@ public class Crime {
 
     public void setSolved(boolean solved) {
         mSolved = solved;
+    }
+
+    public int getViewType() {
+        return mViewType;
+    }
+
+    public void setViewType(int viewType) {
+        mViewType = viewType;
     }
 }

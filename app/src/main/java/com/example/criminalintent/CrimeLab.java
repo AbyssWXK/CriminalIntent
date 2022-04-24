@@ -25,6 +25,7 @@ public class CrimeLab {
             Crime crime = new Crime();
             crime.setTitle("Crime #" + i);
             crime.setSolved(i % 2 ==0);
+            crime.setViewType(i % 2 + 1);
             mCrimes.add(crime);
             Log.d(TAG,crime.getTitle());
         }
