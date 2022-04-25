@@ -1,5 +1,8 @@
 package com.example.criminalintent;
 
+import android.app.Activity;
+import android.bluetooth.le.AdvertisingSetParameters;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,8 +22,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class CrimeListFragment extends Fragment {
     public static String TAG = "CrimeListFragment";
+    public static final int REQUEST_ITEM_POS = 0;
     private RecyclerView mCrimeRecyclerView;
     private CrimeAdapter mAdapter;
+    private int ChangedPos = 0;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
@@ -33,12 +38,37 @@ public class CrimeListFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        updateUI();
+    }
+
     private void updateUI(){
         CrimeLab crimeLab = CrimeLab.get(getActivity());
         List<Crime> crimes = crimeLab.getCrimes();
+        if(mAdapter == null) {
+            mAdapter = new CrimeAdapter(crimes);
+            mCrimeRecyclerView.setAdapter(mAdapter);
+        }else{
+            // mAdapter.notifyDataSetChanged();
+            mAdapter.notifyItemChanged(ChangedPos);
+        }
+    }
 
-        mAdapter = new CrimeAdapter(crimes);
-        mCrimeRecyclerView.setAdapter(mAdapter);
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        if(resultCode!= Activity.RESULT_OK){
+            return;
+        }
+        if(requestCode == REQUEST_ITEM_POS){
+            if(data == null){
+                return;
+            }else{
+                ChangedPos = CrimeFragment.getChangedPos(data);
+                // ChangedPos =  data.getIntExtra(CrimeFragment.ARG_CRIME_ID,0);
+            }
+        }
     }
 
     private abstract class ItemHolder extends RecyclerView.ViewHolder{
@@ -48,6 +78,7 @@ public class CrimeListFragment extends Fragment {
         }
         public abstract void bind(Crime crime);
     }
+
 
     private class CrimeHolder extends ItemHolder implements View.OnClickListener{
         private TextView mTitleTextView;
@@ -62,9 +93,13 @@ public class CrimeListFragment extends Fragment {
 
         @Override
         public void onClick(View view){
-            Toast.makeText(getActivity(),mCrime.getTitle()+" Clicked!", Toast.LENGTH_SHORT)
-            .show();
+//            Toast.makeText(getActivity(),mCrime.getTitle()+" Clicked!", Toast.LENGTH_SHORT)
+//            .show();
+            Intent intent = CrimeActivity.newIntent(getActivity(),mCrime.getId());
+            // startActivity(intent);REQUEST_ITEM_POS
+            startActivityForResult(intent,REQUEST_ITEM_POS);
         }
+
         @Override
         public void bind(Crime crime){
             mCrime = crime;
@@ -91,16 +126,15 @@ public class CrimeListFragment extends Fragment {
             mPoliceButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(getActivity(),"Call 110!", Toast.LENGTH_SHORT)
-                            .show();
+                    Toast.makeText(getActivity(),"110",Toast.LENGTH_SHORT);
                 }
             });
         }
 
         @Override
         public void onClick(View view){
-            Toast.makeText(getActivity(),mCrime.getTitle()+" Clicked!", Toast.LENGTH_SHORT)
-                    .show();
+            Intent intent = CrimeActivity.newIntent(getActivity(),mCrime.getId());
+            startActivity(intent);
         }
         @Override
         public void bind(Crime crime){

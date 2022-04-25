@@ -37,8 +37,9 @@ public class CrimeLab {
     }
     public Crime getCrime(UUID id){
         for (Crime crime : mCrimes){
-            if(crime.getId() == id){
-                Log.d(TAG,crime.getId()+crime.getTitle());
+            // Log.d(TAG,crime.getId()+crime.getId().toString());
+            if(crime.getId() .equals(id)){
+                // Log.d(TAG,"Find!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                 return crime;
             }
         }
