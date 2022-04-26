@@ -8,10 +8,12 @@
         <entry key="..\:/Users/wuxinke/StudioProjects/CriminalIntent/app/src/main/res/layout/activity_crime_page.xml" value="0.5389221556886228" />
         <entry key="..\:/Users/wuxinke/StudioProjects/CriminalIntent/app/src/main/res/layout/activity_crime_pager.xml" value="0.1" />
         <entry key="..\:/Users/wuxinke/StudioProjects/CriminalIntent/app/src/main/res/layout/activity_fragment.xml" value="0.1" />
+        <entry key="..\:/Users/wuxinke/StudioProjects/CriminalIntent/app/src/main/res/layout/dialog_date.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/wuxinke/StudioProjects/CriminalIntent/app/src/main/res/layout/fragment_crime.xml" value="0.17314814814814813" />
         <entry key="..\:/Users/wuxinke/StudioProjects/CriminalIntent/app/src/main/res/layout/fragment_crime_list.xml" value="0.1" />
         <entry key="..\:/Users/wuxinke/StudioProjects/CriminalIntent/app/src/main/res/layout/list_item_crime.xml" value="0.1" />
         <entry key="..\:/Users/wuxinke/StudioProjects/CriminalIntent/app/src/main/res/layout/list_item_police.xml" value="0.5" />
+        <entry key="..\:/Users/wuxinke/StudioProjects/CriminalIntent/app/src/main/res/menu/fragment_crime_list.xml" value="0.5" />
       </map>
     </option>
   </component>
