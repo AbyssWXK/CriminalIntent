@@ -1,5 +1,7 @@
 package com.example.criminalintent;
 
+import com.example.criminalintent.database.CrimeDbSchema;
+
 import java.util.UUID;
 import java.util.Date;
 
@@ -9,8 +11,14 @@ public class Crime {
     private Date mDate;
     private boolean mSolved;
     private int mViewType;
+    private String mSuspect;
     public Crime(){
-        mId = UUID.randomUUID();
+        this(UUID.randomUUID());
+//        mId = UUID.randomUUID();
+//        mDate = new Date();
+    }
+    public Crime(UUID id){
+        mId = id;
         mDate = new Date();
     }
 
@@ -48,5 +56,13 @@ public class Crime {
 
     public void setViewType(int viewType) {
         mViewType = viewType;
+    }
+
+    public void setSuspect(String suspect) {
+        mSuspect = suspect;
+    }
+
+    public String getSuspect() {
+        return mSuspect;
     }
 }
